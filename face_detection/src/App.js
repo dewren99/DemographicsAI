@@ -9,13 +9,10 @@ import FaceRecognition from './comps/faceRecog/face_recog';
 import Particles from 'react-particles-js';
 
 import Clarifai from 'clarifai';
-// const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
   apiKey: 'e143dc4e73f5412fa930149a95587fa1'
  });
-
-//  const demographics = "c0c0ac362b03416da06ab3fa36fb58e3";
 
 const particleParams = {
   particles: {
@@ -46,7 +43,8 @@ class App extends Component{
       input:'',
       imgURL:'',
       imgBox: {},
-      route: 'signin'
+      route: 'signin',
+      isSignedIn: false
     }
   }
 
@@ -85,6 +83,12 @@ class App extends Component{
   }
 
   onRouteChange = (route) =>{
+    if(route === 'signout'){
+      this.setState({isSignedIn: false})
+    }
+    else if(route === 'home'){
+      this.setState({isSignedIn: true})
+    }
     this.setState({route: route});
   }
 
@@ -95,7 +99,9 @@ class App extends Component{
       <div className="App">
       <Particles className='particles'
       params={particleParams}/>
-      <Nav onRouteChange = {this.onRouteChange} />
+      <Nav 
+      isSignedIn = {this.state.isSignedIn} 
+      onRouteChange = {this.onRouteChange} />
       { this.state.route === 'home' ?
       <div>
           <Logo />
