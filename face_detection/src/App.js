@@ -96,9 +96,8 @@ class App extends Component{
       <Particles className='particles'
       params={particleParams}/>
       <Nav onRouteChange = {this.onRouteChange} />
-      { this.state.route === 'signin' ?
-      <Signin onRouteChange = {this.onRouteChange} />
-      : <div>
+      { this.state.route === 'home' ?
+      <div>
           <Logo />
           <ImageLink 
           onInput={this.onInput}
@@ -107,6 +106,12 @@ class App extends Component{
           imgURL={this.state.imgURL}
           imgBox={this.state.imgBox}/>
           </div>
+
+        :(
+          this.state.route ==='signin'
+          ? <Signin onRouteChange={this.onRouteChange}/>
+          :<Signup onRouteChange={this.onRouteChange}/>
+        )
       }
       </div>
     );
