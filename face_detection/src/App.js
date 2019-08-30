@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Nav from './comps/navs/nav';
+import Signin from './comps/signin/signin';
+import Signup from './comps/signup/signup';
 import './App.css';
 import Logo from './comps/logo/logo.js';
 import ImageLink from './comps/imageLink/image_link';
@@ -44,6 +46,7 @@ class App extends Component{
       input:'',
       imgURL:'',
       imgBox: {},
+      route: 'signin'
     }
   }
 
@@ -79,21 +82,32 @@ class App extends Component{
        this.state.input)
        .then(response => this.drawBox(this.calculateBoxLocation(response)))
        .catch(err => console.log(err));
-      }
+  }
+
+  onRouteChange = (route) =>{
+    this.setState({route: route});
+  }
+
+  
 
   render(){
     return (
       <div className="App">
       <Particles className='particles'
       params={particleParams}/>
-      <Nav />
-      <Logo />
-      <ImageLink 
-      onInput={this.onInput}
-      onSubmit={this.onSubmit} />
-      <FaceRecognition 
-      imgURL={this.state.imgURL}
-      imgBox={this.state.imgBox}/>
+      <Nav onRouteChange = {this.onRouteChange} />
+      { this.state.route === 'signin' ?
+      <Signin onRouteChange = {this.onRouteChange} />
+      : <div>
+          <Logo />
+          <ImageLink 
+          onInput={this.onInput}
+          onSubmit={this.onSubmit} />
+          <FaceRecognition 
+          imgURL={this.state.imgURL}
+          imgBox={this.state.imgBox}/>
+          </div>
+      }
       </div>
     );
   }

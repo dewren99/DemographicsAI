@@ -7,7 +7,7 @@ const Logo = () =>{
     return(
         <div className=''>
         <Tilt className="Tilt" options={{ max : 25 }} style={{ height: 250, width: 250 }} >
- <div className="Tilt-inner"> 👽 </div>
+ <div className="Tilt-inner"> LOGO </div>
 </Tilt>
         </div>
     );
