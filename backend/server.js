@@ -17,56 +17,70 @@ app.use(cors());
 
 const app = express();
 
-const database = {
-    users: [
-        {
-            id: "123"
-        }, {
-            id: "456"
-        }
-
-    ]
-}
-
 app.get('/', (request, response) => {})
 
 app.post('/signin', (request, response) => {
-    if (true) {
-        response.json('success');
-    } else {
-        response
-            .status(400)
-            .json(`Error Logging in`);
-    }
+    db
+        .select('email', 'hash')
+        .where('email', '=', request.body.email)
+        .from('login')
+        .then(data => {
+            const isValid = bcrypt.compareSync(request.body.password, data[0].hash);
+            if (isValid) {
+                return db
+                    .select('*')
+                    .from('users')
+                    .where('email', '=', request.body.email)
+                    .then(user => {
+                        response.json(user[0])
+                    })
+                    .catch(error => response.status(400).json('Cant get the user'))
+            }
+            else{
+                response.status(400).json('Wrong credentials')
+            }
+        })
+        .catch(error => response.status(400).json('Wrong credentials'))
+
 })
 
 app.post('/signup', (request, response) => {
     const {email, name, password} = request.body;
-    db('users')
-        .returning('*')
-        .insert({email: email, name: name, joined: new Date()})
-        .then(response => {
-            response.json(response);
-        })
+    const hash = bcrypt.hashSync(password);
+    db.transaction(trx => {
+        trx
+            .insert({hash: hash, email: email})
+            .into('login')
+            .returning('email')
+            .then(loginEmail => {
+                return trx('users')
+                    .returning('*')
+                    .insert({email: loginEmail[0], name: name, joined: new Date()})
+                    .then(user => {
+                        response.json(user);
+                    })
+            })
+            .then(trx.commit)
+            .catch(trx.rollback)
+    }).catch(error => response.status(400).json('Error signin up!'))
 })
 
 app.get('profile/:id', (request, response) => {
     const {id} = request.params;
-    let found = false;
-    database
-        .users
-        .forEach(users => {
-            if (users.id === id) {
-                response.json(user);
-                found == true;
-
+    db
+        .select('*')
+        .from('users')
+        .where({id: id})
+        .then(user => {
+            if (user.length) {
+                response.json(user[0])
+            } else {
+                response
+                    .status(400)
+                    .json('Not found!')
             }
         })
-    if (!found) {
-        response
-            .status(404)
-            .json('This user does not exists!');
-    }
+        .catch(error => response.status(400).json('Error getting the user!'))
 })
 
 app.listen(3002, () => {})
