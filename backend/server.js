@@ -2,6 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const db = require('knex')({
+    client: 'pg',
+    connection: {
+        host: '127.0.0.1',
+        user: 'denizevrendilek',
+        password: '',
+        database: 'users'
+    }
+});
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -22,7 +31,9 @@ const database = {
 app.get('/', (request, response) => {})
 
 app.post('/signin', (request, response) => {
-    if (true) {} else {
+    if (true) {
+        response.json('success');
+    } else {
         response
             .status(400)
             .json(`Error Logging in`);
@@ -31,7 +42,12 @@ app.post('/signin', (request, response) => {
 
 app.post('/signup', (request, response) => {
     const {email, name, password} = request.body;
-    response.json('');
+    db('users')
+        .returning('*')
+        .insert({email: email, name: name, joined: new Date()})
+        .then(response => {
+            response.json(response);
+        })
 })
 
 app.get('profile/:id', (request, response) => {

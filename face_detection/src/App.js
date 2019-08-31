@@ -42,8 +42,25 @@ class App extends Component {
             imgURL: '',
             imgBox: {},
             route: 'signin',
-            isSignedIn: false
+            isSignedIn: false,
+            user: {
+                id: '',
+                name: '',
+                email: '',
+                joined: ''
+            }
         }
+    }
+
+    loadUser = (data) => {
+        this.setState({
+            user: {
+                id: data.id,
+                name: data.name,
+                email: data.email,
+                joined: data.joined
+            }
+        })
     }
 
     calculateBoxLocation = (data) => {
@@ -51,8 +68,6 @@ class App extends Component {
         const img = document.getElementById('inputImg');
         const width = Number(img.width);
         const height = Number(img.height);
-        // console.log('top_row', face.top_row) console.log('h', height)
-        // console.log('w', width)
         return {
             leftCol: face.left_col * width,
             topRow: face.top_row * height,
@@ -100,8 +115,8 @@ class App extends Component {
                         </div>
 
                     : (this.state.route === 'signin'
-                        ? <Signin onRouteChange={this.onRouteChange}/>
-                        : <Signup onRouteChange={this.onRouteChange}/>)
+                        ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+                        : <Signup loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>)
 }
             </div>
         );
