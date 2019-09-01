@@ -8,44 +8,48 @@ const db = require('knex')({
         host: '127.0.0.1',
         user: 'denizevrendilek',
         password: '',
-        database: 'users'
+        database: 'fd-users'
     }
 });
+
+const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
-const app = express();
+app.get('/', (req, res) => {
+    res.send('home working');
+})
 
-app.get('/', (request, response) => {})
-
-app.post('/signin', (request, response) => {
+app.post('/signin', (req, res) => {
+    console.log('/signin');
     db
         .select('email', 'hash')
-        .where('email', '=', request.body.email)
+        .where('email', '=', req.body.email)
         .from('login')
         .then(data => {
-            const isValid = bcrypt.compareSync(request.body.password, data[0].hash);
+            const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
             if (isValid) {
                 return db
                     .select('*')
                     .from('users')
-                    .where('email', '=', request.body.email)
+                    .where('email', '=', req.body.email)
                     .then(user => {
-                        response.json(user[0])
+                        res.json(user[0])
                     })
-                    .catch(error => response.status(400).json('Cant get the user'))
-            }
-            else{
-                response.status(400).json('Wrong credentials')
+                    .catch(error => res.status(400).json('Cant get the user'))
+            } else {
+                res
+                    .status(400)
+                    .json('Wrong credentials')
             }
         })
-        .catch(error => response.status(400).json('Wrong credentials'))
+        .catch(error => res.status(400).json('Wrong credentials'))
 
 })
 
-app.post('/signup', (request, response) => {
-    const {email, name, password} = request.body;
+app.post('/signup', (req, res) => {
+    const {email, name, password} = req.body;
     const hash = bcrypt.hashSync(password);
     db.transaction(trx => {
         trx
@@ -57,30 +61,36 @@ app.post('/signup', (request, response) => {
                     .returning('*')
                     .insert({email: loginEmail[0], name: name, joined: new Date()})
                     .then(user => {
-                        response.json(user);
+                        res.json(user[0])
                     })
+                    .then(trx.commit)
+                    .catch(trx.rollback)
             })
-            .then(trx.commit)
-            .catch(trx.rollback)
-    }).catch(error => response.status(400).json('Error signin up!'))
+    }).catch(error => res.status(400).json('Error signing up!'))
+
 })
 
-app.get('profile/:id', (request, response) => {
-    const {id} = request.params;
+app.get('/profile/:id', (req, res) => {
+    const {id} = req.params;
     db
         .select('*')
         .from('users')
         .where({id: id})
         .then(user => {
             if (user.length) {
-                response.json(user[0])
+                res.json(user[0])
             } else {
-                response
+                res
                     .status(400)
                     .json('Not found!')
             }
         })
-        .catch(error => response.status(400).json('Error getting the user!'))
+        .then(user => {
+            console.log(user);
+        })
+        .catch(error => res.status(400).json('Error getting the user!'))
 })
 
-app.listen(3002, () => {})
+app.listen(3000, () => {
+    console.log('server is running');
+})
