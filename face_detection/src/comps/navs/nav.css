@@ -1,0 +1,7 @@
+.toSigninButton{
+    /* border-radius: 50%; */
+}
+
+.toSigninButton svg{
+    fill: currentColor;
+}

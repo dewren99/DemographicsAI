@@ -15,9 +15,9 @@ const app = new Clarifai.App({apiKey: 'e143dc4e73f5412fa930149a95587fa1'});
 const particleParams = {
     particles: {
         number: {
-            value: 150,
+            value: 60,
             density: {
-                enable: true,
+                enable: false,
                 value_area: 2000
             }
         },
@@ -101,13 +101,19 @@ class App extends Component {
             this.setState({isSignedIn: true})
         }
         this.setState({route: route});
+        console.log('ran');
+    }
+
+    getRoute = ()=>{
+      const currRoute = this.state.route;
+      console.log(currRoute);
     }
 
     render() {
         return (
             <div className="App">
                 <Particles className='particles' params={particleParams}/>
-                <Nav isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/> {this.state.route === 'home'
+                <Nav route={this.state.route} isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/> {this.state.route === 'home'
                     ? <div>
                             <Logo/>
                             <ImageLink onInput={this.onInput} onSubmit={this.onSubmit}/>
