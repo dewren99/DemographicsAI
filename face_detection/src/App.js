@@ -45,7 +45,7 @@ class App extends Component {
         this.state = {
             input: '',
             imgURL: '',
-            imgBox: {},
+            imgBox: '',
             route: 'signin',
             isSignedIn: false,
             user: {
@@ -69,15 +69,40 @@ class App extends Component {
     }
 
     calculateBoxLocation = (data) => {
-        const face = data.outputs[0].data.regions[0].region_info.bounding_box;
+        const faces = data.outputs[0].data.regions;
+        let arrOfBoxes = [];
+        let i;
+        // let faceBoxLocation = {     leftCol: '',     topRow: '',     rightCol: '',
+        //  bottomRow: '' };
+        // const face = data.outputs[0].data.regions[0].region_info.bounding_box;
         const img = document.getElementById('inputImg');
         const width = Number(img.width);
         const height = Number(img.height);
+        for (i = 0; i < faces.length; i++) {
+            let faceBoxLocation = {
+                leftCol: '',
+                topRow: '',
+                rightCol: '',
+                bottomRow: ''
+            };
+            faceBoxLocation.leftCol = faces[i].region_info.bounding_box.left_col * width;
+            faceBoxLocation.topRow = faces[i].region_info.bounding_box.top_row * height;
+            faceBoxLocation.rightCol = width - (faces[i].region_info.bounding_box.right_col * width);
+            faceBoxLocation.bottomRow = height - (faces[i].region_info.bounding_box.bottom_row * height);
+            arrOfBoxes[i] = faceBoxLocation;
+        }
+        // arrOfBoxes.forEach(item => console.log(item));
+        // let j;
+        // for(j = 0; j<arrOfBoxes.length; j++){ console.log(arrOfBoxes[j].leftCol);}
+        // console.log('full print: ', arrOfBoxes);
         return {
-            leftCol: face.left_col * width,
-            topRow: face.top_row * height,
-            rightCol: width - (face.right_col * width),
-            bottomRow: height - (face.bottom_row * height)
+          
+          arr: arrOfBoxes
+          //arrOfBoxes[1]
+            // leftCol: face.left_col * width,
+            // topRow: face.top_row * height,
+            // rightCol: width - (face.right_col * width),
+            // bottomRow: height - (face.bottom_row * height)
         }
     }
 
@@ -114,7 +139,8 @@ class App extends Component {
                 <Helmet>
                     <title>{TITLE}</title>
                 </Helmet>
-                <Favicon url="https://raw.githubusercontent.com/dewren99/Face-Detection/master/face_detection/public/favicon.ico" />
+                <Favicon
+                    url="https://raw.githubusercontent.com/dewren99/Face-Detection/master/face_detection/public/favicon.ico"/>
                 <Particles className='particles' params={particleParams}/>
                 <Nav
                     currRoute={this.state.route}
