@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// import ReactDOM from 'react-dom';
 import Nav from './comps/navs/nav';
 import Signin from './comps/signin/signin';
 import Signup from './comps/signup/signup';
@@ -7,6 +8,8 @@ import Logo from './comps/logo/logo.js';
 import ImageLink from './comps/imageLink/image_link';
 import FaceRecognition from './comps/faceRecog/face_recog';
 import Particles from 'react-particles-js';
+import {Helmet} from "react-helmet";
+import Favicon from 'react-favicon';
 
 import Clarifai from 'clarifai';
 
@@ -33,6 +36,8 @@ const particleParams = {
         }
     }
 }
+
+const TITLE = 'DemographicsAI'
 
 class App extends Component {
     constructor() {
@@ -106,8 +111,15 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <Helmet>
+                    <title>{TITLE}</title>
+                </Helmet>
+                <Favicon url="https://github.com/dewren99/Face-Detection/blob/master/face_detection/public/favicon.ico" />
                 <Particles className='particles' params={particleParams}/>
-                <Nav currRoute={this.state.route} isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/> {this.state.route === 'home'
+                <Nav
+                    currRoute={this.state.route}
+                    isSignedIn={this.state.isSignedIn}
+                    onRouteChange={this.onRouteChange}/> {this.state.route === 'home'
                     ? <div>
                             <Logo/>
                             <ImageLink onInput={this.onInput} onSubmit={this.onSubmit}/>
