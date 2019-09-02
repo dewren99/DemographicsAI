@@ -22,7 +22,7 @@
         background-color: black;
         color: #777;
         border-radius: 1px;
-        padding: 1px;
+        padding: 2px 0;
         position: absolute;
         opacity: 0;
         transition: opacity 1s;

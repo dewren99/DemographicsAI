@@ -114,7 +114,7 @@ class App extends Component {
                 <Helmet>
                     <title>{TITLE}</title>
                 </Helmet>
-                <Favicon url="https://github.com/dewren99/Face-Detection/blob/master/face_detection/public/favicon.ico" />
+                <Favicon url="https://raw.githubusercontent.com/dewren99/Face-Detection/master/face_detection/public/favicon.ico" />
                 <Particles className='particles' params={particleParams}/>
                 <Nav
                     currRoute={this.state.route}
