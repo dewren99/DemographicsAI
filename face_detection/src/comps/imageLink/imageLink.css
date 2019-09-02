@@ -1,0 +1,54 @@
+.imageLink {
+    font-size: 20px;
+    position: relative;
+}
+
+.imageSearchBox .imageLinkOnHoverText {
+    visibility: hidden;
+}
+
+.imageLinkOnHoverText p {
+    font-size: 0;
+}
+.submit-button {
+    padding: 5px;
+}
+
+@media (min-width: 600px) and (min-height: 575px) {
+    .imageSearchBox .imageLinkOnHoverText {
+        visibility: hidden;
+        width: 30vw;
+        max-height: 40vh;
+        background-color: black;
+        color: #777;
+        border-radius: 1px;
+        padding: 1px;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 1s;
+        z-index: 1;
+    }
+    .imageSearchBox:hover .imageLinkOnHoverText {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .imageSearchBox .imageLinkOnHoverText::after {
+        content: " ";
+        position: absolute;
+        top: 6%;
+        right: 100%;
+        margin-top: -6px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent black transparent transparent;
+    }
+
+    .imageLinkOnHoverText p {
+        text-align: center;
+        font-size: medium;
+    }
+    .submit-button {
+        padding: 10px;
+    }
+}
