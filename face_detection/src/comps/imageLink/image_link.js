@@ -1,7 +1,7 @@
 import React from 'react';
 import './imageLink.css'
 
-const ImageLink = ({onInput, onSubmit}) => {
+const ImageLink = ({onInput, onSubmit, onEnterPress}) => {
     return (
         <div className="imageLink vw-50 vh-45">
             <div className="imageSearchBox">
@@ -9,8 +9,10 @@ const ImageLink = ({onInput, onSubmit}) => {
                     className="input b ph input-reset ba b--black bg-transparent"
                     type='text'
                     placeholder='Enter Picture URL'
-                    size = 'auto'
-                    onChange={onInput}/>
+                    size='auto'
+                    onChange={onInput}
+                    onKeyPress={onEnterPress}
+                    />
 
                 <span className="imageLinkOnHoverText">
                     <p>Will guess your age, gender, multicultural appearance based on the image of
@@ -23,6 +25,7 @@ const ImageLink = ({onInput, onSubmit}) => {
                 <button
                     className="button b ph input-reset ba1 b--black bg-transparent grow pointer"
                     onClick={onSubmit}>
+
                     Detect
                 </button>
             </div>

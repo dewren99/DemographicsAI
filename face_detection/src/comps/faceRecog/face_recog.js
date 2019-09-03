@@ -6,13 +6,13 @@ const FaceRegonition = ({imgURL, imgBox}) => {
     if (imgBox) {
         const createFaceBoxes = () => {
             const numOfFaces = imgBox.arr.length
-            console.log(numOfFaces + ' faces found!')
             let faceLocationsArr = [];
             let i;
             for (i = 0; i < numOfFaces; i++) {
                 faceLocationsArr.push(
                     <div
                         className={"bounding-box" + i}
+                        key={"face"+i}
                         style={{
                         top: imgBox.arr[i].topRow,
                         right: imgBox.arr[i].rightCol,
@@ -21,6 +21,7 @@ const FaceRegonition = ({imgURL, imgBox}) => {
                     }}></div>
                 )
             }
+            console.log('Number of faces: '+ numOfFaces)
             return faceLocationsArr;
         }
 

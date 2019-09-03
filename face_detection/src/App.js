@@ -100,6 +100,7 @@ class App extends Component {
     }
 
     onSubmit = () => {
+        console.log(this.state.input)
         this.setState({imgURL: this.state.input});
 
         app
@@ -118,6 +119,19 @@ class App extends Component {
         this.setState({route: route});
     }
 
+    onEnterPress = (key) => {
+        var code = key.keyCode || key.which;
+        if (code === 13) {
+            this.setState({imgURL: this.state.input});
+
+            app
+                .models
+                .predict(Clarifai.DEMOGRAPHICS_MODEL, this.state.input)
+                .then(response => this.drawBox(this.calculateBoxLocation(response)))
+                .catch(err => console.log(err));
+        }
+    }
+
     render() {
         return (
             <div className="App">
@@ -133,7 +147,10 @@ class App extends Component {
                     onRouteChange={this.onRouteChange}/> {this.state.route === 'home'
                     ? <div>
                             <Logo/>
-                            <ImageLink onInput={this.onInput} onSubmit={this.onSubmit}/>
+                            <ImageLink
+                                onInput={this.onInput}
+                                onSubmit={this.onSubmit}
+                                onEnterPress={this.onEnterPress}/>
                             <FaceRecognition imgURL={this.state.imgURL} imgBox={this.state.imgBox}/>
                         </div>
 
