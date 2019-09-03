@@ -1,41 +1,23 @@
-.bounding-box0{
-    position: absolute;
-    box-shadow: 0 0 0 2px #ff0000 inset;
-    border-radius: 50%;
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    cursor: pointer;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "left-side left-side right-side right-side" "left-side left-side right-side right-side" "left-side left-side right-side right-side";
 }
 
-.bounding-box1{
-    position: absolute;
-    box-shadow: 0 0 0 2px #ff0000 inset;
-    border-radius: 50%;
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    cursor: pointer;
+.left-side {
+    grid-area: left-side;
 }
 
-.bounding-box2{
-    position: absolute;
-    box-shadow: 0 0 0 2px #ff0000 inset;
-    border-radius: 50%;
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    cursor: pointer;
+.right-side {
+    grid-area: right-side;
 }
 
-.bounding-box3{
+.bounding-box {
     position: absolute;
     box-shadow: 0 0 0 2px #ff0000 inset;
     border-radius: 50%;
-    
+
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
