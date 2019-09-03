@@ -1,4 +1,37 @@
-.bounding-box{
+.bounding-box0{
+    position: absolute;
+    box-shadow: 0 0 0 2px #ff0000 inset;
+    border-radius: 50%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.bounding-box1{
+    position: absolute;
+    box-shadow: 0 0 0 2px #ff0000 inset;
+    border-radius: 50%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.bounding-box2{
+    position: absolute;
+    box-shadow: 0 0 0 2px #ff0000 inset;
+    border-radius: 50%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.bounding-box3{
     position: absolute;
     box-shadow: 0 0 0 2px #ff0000 inset;
     border-radius: 50%;

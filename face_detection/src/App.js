@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import ReactDOM from 'react-dom';
 import Nav from './comps/navs/nav';
 import Signin from './comps/signin/signin';
 import Signup from './comps/signup/signup';
@@ -72,9 +71,6 @@ class App extends Component {
         const faces = data.outputs[0].data.regions;
         let arrOfBoxes = [];
         let i;
-        // let faceBoxLocation = {     leftCol: '',     topRow: '',     rightCol: '',
-        //  bottomRow: '' };
-        // const face = data.outputs[0].data.regions[0].region_info.bounding_box;
         const img = document.getElementById('inputImg');
         const width = Number(img.width);
         const height = Number(img.height);
@@ -91,19 +87,8 @@ class App extends Component {
             faceBoxLocation.bottomRow = height - (faces[i].region_info.bounding_box.bottom_row * height);
             arrOfBoxes[i] = faceBoxLocation;
         }
-        // arrOfBoxes.forEach(item => console.log(item));
-        // let j;
-        // for(j = 0; j<arrOfBoxes.length; j++){ console.log(arrOfBoxes[j].leftCol);}
-        // console.log('full print: ', arrOfBoxes);
-        return {
-          
-          arr: arrOfBoxes
-          //arrOfBoxes[1]
-            // leftCol: face.left_col * width,
-            // topRow: face.top_row * height,
-            // rightCol: width - (face.right_col * width),
-            // bottomRow: height - (face.bottom_row * height)
-        }
+
+        return {arr: arrOfBoxes}
     }
 
     drawBox = (imgBox) => {
