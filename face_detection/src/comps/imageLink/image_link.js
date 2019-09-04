@@ -3,10 +3,10 @@ import './imageLink.css'
 
 const ImageLink = ({onInput, onSubmit, onEnterPress}) => {
     return (
-        <div className="imageLink vw-50 vh-45">
-            <div className="imageSearchBox">
+        <div className="center imageLink">
+            <div className="form center pa3 br2 imageSearchBox">
                 <input
-                    className="input b ph input-reset ba b--black bg-transparent"
+                    className="center input b ph input-reset ba b--black bg-transparent"
                     type='text'
                     placeholder='Enter Picture URL'
                     size='auto'

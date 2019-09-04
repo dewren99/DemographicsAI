@@ -1,17 +1,108 @@
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: "left-side left-side right-side right-side" "left-side left-side right-side right-side" "left-side left-side right-side right-side";
-}
-
-.left-side {
-    grid-area: left-side;
+    grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr [col7] 1fr [col8] 1fr [col9] 1fr;
+    grid-template-rows: [row1] 1fr [row2] 1fr [row3] 1fr [row4] 1fr [row5] 1fr;
+    grid-template-areas: "left-top-side left-top-side left-top-side left-top-side middle-area right-side right-side right-side right-side" "imageLocation imageLocation imageLocation imageLocation middle-area right-side right-side right-side right-side" "imageLocation imageLocation imageLocation imageLocation middle-area right-side right-side right-side right-side" "imageLocation imageLocation imageLocation imageLocation middle-area right-side right-side right-side right-side" "left-bottom-side left-bottom-side left-bottom-side left-bottom-side middle-area right-side right-side right-side right-side";
 }
 
 .right-side {
     grid-area: right-side;
 }
+
+.middle-area {
+    grid-area: middle-area;
+    border-left: 3px solid;
+    height: 3fr;
+    justify-self: center;
+    grid-row-start: row2;
+    grid-row-end: row5;
+}
+
+.imageLocation {
+    grid-area: imageLocation;
+}
+
+.imageLocation img{
+    grid-row-start: row2;
+    grid-row-end: row5;
+    grid-column-start: col1;
+    grid-column-end: col5;
+
+}
+
+.left-top-side {
+    grid-area: left-top-side;
+}
+
+.left-bottom-side {
+    grid-area: left-bottom-side;
+}
+@media only screen and (max-width: 800px) {
+    .middle-area {
+        visibility: hidden;
+    }
+}
+
+/* SECTIONS  =============================================================================
+
+.section {
+    clear: both;
+    padding: 0;
+    margin: 0;
+}
+
+/*  GROUPING  ============================================================================= */
+/* .group:after,
+.group:before {
+    content: "";
+    display: table;
+}
+.group:after {
+    clear: both;
+}
+.group {
+    zoom: 1;
+    /* For IE 6/7 (trigger hasLayout) */
+/*}
+
+/*  GRID COLUMN SETUP   ==================================================================== */
+
+/* .col {
+    display: block;
+    float: left;
+    margin: 1% 0 1% 1.6%;
+}
+.col:first-child {
+    margin-left: 0;
+} */
+/* all browsers except IE6 and lower */
+
+/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 480 PIXELS */
+/* @media only screen and (max-width: 480px) {
+    .col {
+        margin: 1% 0;
+    }
+} */
+
+/*  GRID OF TWO   ============================================================================= */
+
+/* .span_2_of_2 {
+    width: 100%;
+}
+
+.span_1_of_2 {
+    width: 49.2%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+/* @media only screen and (max-width: 480px) {
+    .left-side {
+        width: 100%;
+    }
+    .right-side {
+        width: 100%;
+    }
+} */
 
 .bounding-box {
     position: absolute;

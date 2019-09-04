@@ -4,7 +4,9 @@ import './face_recog.css'
 const FaceRegonition = ({imgURL, imgBox}) => {
 
     if (imgBox) {
+        console.log('Face locations', imgBox.arr)
         const numOfFaces = imgBox.arr.length
+
         const createFaceBoxes = () => {
 
             let faceLocationsArr = [];
@@ -23,8 +25,12 @@ const FaceRegonition = ({imgURL, imgBox}) => {
                 )
             }
             console.log('Number of faces: ' + numOfFaces)
+            //console.log('Face locations:', faceLocationsArr)
             return faceLocationsArr;
         }
+
+        const faceLocationsArr = createFaceBoxes();
+        console.log("func:", faceLocationsArr);
 
         const displayDemographicsData = () => {
             let dataArr = [];
@@ -43,23 +49,45 @@ const FaceRegonition = ({imgURL, imgBox}) => {
         }
 
         return (
-            <div className="grid-container">
-                <div className="left-side">
-                    <div className='center ma'>
-                        <div className='absolute mt2'>
-                            <img id='inputImg' alt='' src={imgURL} width='500px' height='auto'/> {createFaceBoxes()}
+            <div className='center ma'>
+                <div className="grid-container">
+                    <div className="right-side">{displayDemographicsData()}</div>
+                    <div className="ba b--black-20 middle-area"></div>
+                    <div className='absolute mt2'>
+                        <div className="imageLocation">
+                            <div className=""><img
+                                className="inputImg"
+                                id='inputImg'
+                                alt=''
+                                src={imgURL}
+                                width='350px'
+                                height='auto'/> {createFaceBoxes()}</div>
                         </div>
                     </div>
+                    <div className="left-top-side"></div>
+                    <div className="left-bottom-side"></div>
                 </div>
-                <div className="right-side">{displayDemographicsData()}</div>
             </div>
         );
     } else {
         return (
-            <div className='left-side'>
-                <div className='center ma'>
-                    <img id='inputImg' alt='' src={imgURL} width='500px' height='auto'/>
-                    <div className='bounding-box' style={{}}></div>
+            <div className='center ma'>
+                <div className="grid-container">
+                    <div className="right-side"></div>
+                    <div className="ba b--black-20 middle-area"></div>
+                    <div className='absolute mt2'>
+                        <div className="imageLocation">
+                            <div className=""><img
+                                className="inputImg"
+                                id='inputImg'
+                                alt=''
+                                src={imgURL}
+                                width='350px'
+                                height='auto'/></div>
+                        </div>
+                    </div>
+                    <div className="left-top-side"></div>
+                    <div className="left-bottom-side"></div>
                 </div>
             </div>
         );

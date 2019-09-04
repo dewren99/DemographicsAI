@@ -92,6 +92,13 @@ class App extends Component {
             faceBoxLocation.rightCol = width - (faces[i].region_info.bounding_box.right_col * width);
             faceBoxLocation.bottomRow = height - (faces[i].region_info.bounding_box.bottom_row * height);
 
+            // faceBoxLocation.leftCol =faces[i].region_info.bounding_box.left_col * width
+            // faceBoxLocation.topRow = faces[i].region_info.bounding_box.top_row * height;
+            // faceBoxLocation.rightCol = (faces[i].region_info.bounding_box.right_col *
+            // width) - (faces[i].region_info.bounding_box.right_col.left_col * width);
+            // faceBoxLocation.bottomRow = (faces[i].region_info.bounding_box.bottom_row *
+            // height) - (faces[i].region_info.bounding_box.top_row * height)
+
             faceBoxLocation.demographicsData.age = faces[i].data.face.age_appearance.concepts[0].name;
             faceBoxLocation.demographicsData.gender = faces[i].data.face.gender_appearance.concepts[0].name;
             faceBoxLocation.demographicsData.race = faces[i].data.face.multicultural_appearance.concepts[0].name;
