@@ -80,6 +80,7 @@
 
 .spacer {
     display: none;
+    /* height: 0; */
 }
 @keyframes breathing {
     0% {
@@ -152,10 +153,9 @@
         text-align: center;
     }
 
-    .mobile-spacing {
-        position: absolute;
-        display: inline-block;
-        border: 5px solid yellow;
-        width: 100vw;
+    .spacer{
+            width: 100vw;
+            height: 175px;
+            display: inline-block;
     }
 }

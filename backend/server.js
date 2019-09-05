@@ -23,17 +23,21 @@ app.get('/', (req, res) => {
 
 app.post('/signin', (req, res) => {
     console.log('/signin');
+    const {email, password} = req.body;
+    if(!email || !password){
+        return res.status(400).json("Incorrect form submission");
+    }
     db
         .select('email', 'hash')
-        .where('email', '=', req.body.email)
+        .where('email', '=', email)
         .from('login')
         .then(data => {
-            const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
+            const isValid = bcrypt.compareSync(password, data[0].hash);
             if (isValid) {
                 return db
                     .select('*')
                     .from('users')
-                    .where('email', '=', req.body.email)
+                    .where('email', '=', email)
                     .then(user => {
                         res.json(user[0])
                     })
@@ -50,6 +54,9 @@ app.post('/signin', (req, res) => {
 
 app.post('/signup', (req, res) => {
     const {email, name, password} = req.body;
+    if(!email || !name || !password){
+        return res.status(400).json("Incorrect form submission");
+    }
     const hash = bcrypt.hashSync(password);
     db.transaction(trx => {
         trx

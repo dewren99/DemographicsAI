@@ -55,4 +55,8 @@
     .submit-button {
         padding: 10px;
     }
+
+    .spacer{
+        display: none;
+    }
 }

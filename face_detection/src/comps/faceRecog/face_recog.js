@@ -7,13 +7,6 @@ const FaceRegonition = ({imgURL, imgBox}) => {
         console.log('Face locations', imgBox.arr)
         const numOfFaces = imgBox.arr.length
 
-        // const getKey = (elementName,i) =>{     let div =
-        // document.getElementsByClassName(elementName).key;     return {         div, i
-        //     } } const linkDemographicsData = (i=0) => {     if (faceLocationsArr.key
-        // === dataArr.key) {         dataArr[i].props.style.visibility = 'visible' } }
-        // const unLinkDemographicsData = (i=0)=>{ dataArr[i].props.style.visibility =
-        // 'hidden' }
-
         const createFaceBoxes = () => {
 
             let faceLocationsArr = [];
@@ -38,12 +31,10 @@ const FaceRegonition = ({imgURL, imgBox}) => {
                 )
             }
             console.log('Number of faces: ' + numOfFaces)
-            //console.log('Face locations:', faceLocationsArr)
             return faceLocationsArr;
         }
 
         const faceLocationsArr = createFaceBoxes();
-        console.log("func:", faceLocationsArr);
 
         const displayDemographicsData = () => {
             let dataArr = [];
@@ -85,7 +76,6 @@ const FaceRegonition = ({imgURL, imgBox}) => {
                     </div>
                 )
             }
-            console.log('dataArr: ', dataArr);
             return dataArr;
         }
 
@@ -111,11 +101,7 @@ const FaceRegonition = ({imgURL, imgBox}) => {
                 </div>
                 <div
                     className="spacer"
-                    style={{
-                    width: '100vw',
-                    height: '175px',
-                    display: 'inline-block'
-                }}></div>
+                    ></div>
                 <div className="mobile-right-side">
                     {dataArr}
                 </div>
