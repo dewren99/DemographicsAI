@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "clarifai": "^2.9.1",
+    "core-util-is": "^1.0.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-favicon": "0.0.17",
