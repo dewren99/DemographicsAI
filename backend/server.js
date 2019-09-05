@@ -2,13 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+
 const db = require('knex')({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'denizevrendilek',
-        password: '',
-        database: 'fd-users'
+        connectionString: process.env.DATABASE_URL,
+        ssl: true,
+        // host: '127.0.0.1', user: 'denizevrendilek', password: '', database:
+        // 'fd-users'
     }
 });
 
@@ -24,8 +25,10 @@ app.get('/', (req, res) => {
 app.post('/signin', (req, res) => {
     console.log('/signin');
     const {email, password} = req.body;
-    if(!email || !password){
-        return res.status(400).json("Incorrect form submission");
+    if (!email || !password) {
+        return res
+            .status(400)
+            .json("Incorrect form submission");
     }
     db
         .select('email', 'hash')
@@ -54,8 +57,10 @@ app.post('/signin', (req, res) => {
 
 app.post('/signup', (req, res) => {
     const {email, name, password} = req.body;
-    if(!email || !name || !password){
-        return res.status(400).json("Incorrect form submission");
+    if (!email || !name || !password) {
+        return res
+            .status(400)
+            .json("Incorrect form submission");
     }
     const hash = bcrypt.hashSync(password);
     db.transaction(trx => {
@@ -98,6 +103,6 @@ app.get('/profile/:id', (req, res) => {
         .catch(error => res.status(400).json('Error getting the user!'))
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('server is running');
 })
