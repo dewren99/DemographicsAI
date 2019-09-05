@@ -19,10 +19,11 @@ class Signup extends React.Component {
         this.setState({password: event.target.value})
     }
     onSubmitSignIn = () => {
-        fetch('https://nameless-basin-18712.herokuapp.com/signup', {
+        fetch(`https://nameless-basin-18712.herokuapp.com/signup`, {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
                 body: JSON.stringify({email: this.state.email, password: this.state.password, name: this.state.name})
             })
