@@ -1,12 +1,35 @@
 .grid-container {
     display: grid;
     grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr [col7] 1fr [col8] 1fr [col9] 1fr;
+    /* grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); */
     grid-template-rows: [row1] 1fr [row2] 1fr [row3] 1fr [row4] 1fr [row5] 1fr;
     grid-template-areas: "left-top-side left-top-side left-top-side left-top-side middle-area right-side right-side right-side right-side" "imageLocation imageLocation imageLocation imageLocation middle-area right-side right-side right-side right-side" "imageLocation imageLocation imageLocation imageLocation middle-area right-side right-side right-side right-side" "imageLocation imageLocation imageLocation imageLocation middle-area right-side right-side right-side right-side" "left-bottom-side left-bottom-side left-bottom-side left-bottom-side middle-area right-side right-side right-side right-side";
+    max-height: 40vh;
 }
 
 .right-side {
+    display: block;
+    padding: 10px;
+    margin: 10px 40px 10px 10px;
+    background: rgba(68, 68, 68, 0.5);
     grid-area: right-side;
+    position: relative;
+    border: 1px solid #444;
+    border-radius: 5px;
+    overflow: scroll;
+    text-align: left;
+}
+
+.mobile-right-side {
+    display: none;
+}
+
+.DemographicsData {
+    border: 2px solid rgba(30, 60, 60, 0.5);
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+
 }
 
 .middle-area {
@@ -19,15 +42,21 @@
 }
 
 .imageLocation {
+    display: block;
     grid-area: imageLocation;
+    justify-content: center;
+    align-items: center;
 }
 
-.imageLocation img{
-    grid-row-start: row2;
-    grid-row-end: row5;
-    grid-column-start: col1;
-    grid-column-end: col5;
-
+.faceNumber {
+    border: 0 solid #ff0000;
+    border-radius: 50%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #ff0000;
+    animation: breathing 5s ease-out infinite;
 }
 
 .left-top-side {
@@ -37,72 +66,6 @@
 .left-bottom-side {
     grid-area: left-bottom-side;
 }
-@media only screen and (max-width: 800px) {
-    .middle-area {
-        visibility: hidden;
-    }
-}
-
-/* SECTIONS  =============================================================================
-
-.section {
-    clear: both;
-    padding: 0;
-    margin: 0;
-}
-
-/*  GROUPING  ============================================================================= */
-/* .group:after,
-.group:before {
-    content: "";
-    display: table;
-}
-.group:after {
-    clear: both;
-}
-.group {
-    zoom: 1;
-    /* For IE 6/7 (trigger hasLayout) */
-/*}
-
-/*  GRID COLUMN SETUP   ==================================================================== */
-
-/* .col {
-    display: block;
-    float: left;
-    margin: 1% 0 1% 1.6%;
-}
-.col:first-child {
-    margin-left: 0;
-} */
-/* all browsers except IE6 and lower */
-
-/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 480 PIXELS */
-/* @media only screen and (max-width: 480px) {
-    .col {
-        margin: 1% 0;
-    }
-} */
-
-/*  GRID OF TWO   ============================================================================= */
-
-/* .span_2_of_2 {
-    width: 100%;
-}
-
-.span_1_of_2 {
-    width: 49.2%;
-}
-
-/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
-/* @media only screen and (max-width: 480px) {
-    .left-side {
-        width: 100%;
-    }
-    .right-side {
-        width: 100%;
-    }
-} */
 
 .bounding-box {
     position: absolute;
@@ -113,4 +76,86 @@
     flex-wrap: wrap;
     justify-content: center;
     cursor: pointer;
+}
+
+.spacer {
+    display: none;
+}
+@keyframes breathing {
+    0% {
+        transform: scale(0);
+    }
+
+    25% {
+        transform: scale(1.2);
+    }
+
+    35% {
+        transform: scale(1.5);
+    }
+
+    60% {
+        transform: scale(1.75);
+    }
+
+    85% {
+        transform: scale(1.5);
+    }
+
+    90% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+@media only screen and (max-width: 800px) {
+    .middle-area {
+        visibility: hidden;
+        display: none;
+    }
+    .imageLocation image {
+        width: 100vw;
+
+    }
+
+    .imageLocation {
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    .faceNumber {
+        display: flex;
+        align-items: center;
+    }
+
+    .faceNumber p {
+        border: 0 solid #ff0000;
+        font-weight: bold;
+        color: #ff0000;
+        /* animation: breathing 5s ease-out infinite; */
+    }
+
+    .right-side {
+        display: none;
+    }
+
+    .mobile-right-side {
+        display: block;
+        padding: 10px;
+        margin: 5px;
+        background: rgba(68, 68, 68, 0.5);
+        border: 1px solid #444;
+        border-radius: 5px;
+        overflow: scroll;
+        text-align: center;
+    }
+
+    .mobile-spacing {
+        position: absolute;
+        display: inline-block;
+        border: 5px solid yellow;
+        width: 100vw;
+    }
 }

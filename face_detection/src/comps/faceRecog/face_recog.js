@@ -7,6 +7,13 @@ const FaceRegonition = ({imgURL, imgBox}) => {
         console.log('Face locations', imgBox.arr)
         const numOfFaces = imgBox.arr.length
 
+        // const getKey = (elementName,i) =>{     let div =
+        // document.getElementsByClassName(elementName).key;     return {         div, i
+        //     } } const linkDemographicsData = (i=0) => {     if (faceLocationsArr.key
+        // === dataArr.key) {         dataArr[i].props.style.visibility = 'visible' } }
+        // const unLinkDemographicsData = (i=0)=>{ dataArr[i].props.style.visibility =
+        // 'hidden' }
+
         const createFaceBoxes = () => {
 
             let faceLocationsArr = [];
@@ -16,12 +23,18 @@ const FaceRegonition = ({imgURL, imgBox}) => {
                     <div
                         className={"bounding-box"}
                         key={"face" + i}
+                        data-key
+                        ={"face" + i}
                         style={{
                         top: imgBox.arr[i].topRow,
                         right: imgBox.arr[i].rightCol,
                         bottom: imgBox.arr[i].bottomRow,
                         left: imgBox.arr[i].leftCol
-                    }}></div>
+                    }}>
+                        <div className="faceNumber">
+                            <p>{i + 1}</p>
+                        </div>
+                    </div>
                 )
             }
             console.log('Number of faces: ' + numOfFaces)
@@ -37,10 +50,38 @@ const FaceRegonition = ({imgURL, imgBox}) => {
             let i;
             for (i = 0; i < numOfFaces; i++) {
                 dataArr.push(
-                    <div className={"DemographicsData" + i} key={"face" + i}>
-                        <p className="">{"Age appearance of " + i + " is " + imgBox.arr[i].demographicsData.age}</p>
-                        <p className="">{"Gender appearance of " + i + " is " + imgBox.arr[i].demographicsData.gender}</p>
-                        <p className="">{"Multicultural appearance of " + i + " is " + imgBox.arr[i].demographicsData.race}</p>
+                    <div
+                        className={"DemographicsData"}
+                        key={"face" + i}
+                        data-key
+                        ={"face" + i}
+                        style={{
+                        visibility: 'visible'
+                    }}>
+
+                        <h2 className="">{"Face number " + Number(i + 1)}</h2>
+
+                        <p className="">{"Age Appearance: " + imgBox.arr[i].demographicsData.age}</p>
+                        <p className="">{"Gender Appearance: " + imgBox
+                                .arr[i]
+                                .demographicsData
+                                .gender
+                                .charAt(0)
+                                .toUpperCase() + imgBox
+                                .arr[i]
+                                .demographicsData
+                                .gender
+                                .slice(1)}</p>
+                        <p className="">{"Multicultural Appearance: " + imgBox
+                                .arr[i]
+                                .demographicsData
+                                .race
+                                .charAt(0)
+                                .toUpperCase() + imgBox
+                                .arr[i]
+                                .demographicsData
+                                .race
+                                .slice(1)}</p>
                     </div>
                 )
             }
@@ -48,47 +89,52 @@ const FaceRegonition = ({imgURL, imgBox}) => {
             return dataArr;
         }
 
+        const dataArr = displayDemographicsData();
+
         return (
-            <div className='center ma'>
-                <div className="grid-container">
-                    <div className="right-side">{displayDemographicsData()}</div>
-                    <div className="ba b--black-20 middle-area"></div>
-                    <div className='absolute mt2'>
-                        <div className="imageLocation">
-                            <div className=""><img
-                                className="inputImg"
-                                id='inputImg'
-                                alt=''
-                                src={imgURL}
-                                width='350px'
-                                height='auto'/> {createFaceBoxes()}</div>
-                        </div>
+            <div>
+                <div className='grid-container'>
+                    <div className="right-side">
+                        {dataArr}
                     </div>
+                    <div className="ba b--black-20 middle-area"></div>
+                    <div className='imageLocation absolute'>
+                        <img
+                            className="inputImg"
+                            id='inputImg'
+                            alt=''
+                            src={imgURL}
+                            width='400px'
+                            height='auto'/> {faceLocationsArr}</div>
                     <div className="left-top-side"></div>
                     <div className="left-bottom-side"></div>
+                </div>
+                <div
+                    className="spacer"
+                    style={{
+                    width: '100vw',
+                    height: '175px',
+                    display: 'inline-block'
+                }}></div>
+                <div className="mobile-right-side">
+                    {dataArr}
                 </div>
             </div>
         );
     } else {
         return (
-            <div className='center ma'>
-                <div className="grid-container">
-                    <div className="right-side"></div>
-                    <div className="ba b--black-20 middle-area"></div>
-                    <div className='absolute mt2'>
-                        <div className="imageLocation">
-                            <div className=""><img
-                                className="inputImg"
-                                id='inputImg'
-                                alt=''
-                                src={imgURL}
-                                width='350px'
-                                height='auto'/></div>
-                        </div>
-                    </div>
-                    <div className="left-top-side"></div>
-                    <div className="left-bottom-side"></div>
-                </div>
+            <div className='grid-container'>
+                <div className=""></div>
+                <div className="ba b--black-20 middle-area"></div>
+                <div className='imageLocation absolute'><img
+                    className="inputImg"
+                    id='inputImg'
+                    alt=''
+                    src={imgURL}
+                    width='400px'
+                    height='auto'/></div>
+                <div className="left-top-side"></div>
+                <div className="left-bottom-side"></div>
             </div>
         );
     }

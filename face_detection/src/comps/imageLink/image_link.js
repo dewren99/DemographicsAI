@@ -29,6 +29,13 @@ const ImageLink = ({onInput, onSubmit, onEnterPress}) => {
                     Detect
                 </button>
             </div>
+            <div
+                    className="spacer"
+                    style={{
+                    width: '100vw',
+                    height: '50px',
+                    display: 'inline-block'
+                }}></div>
         </div>
     );
 }
