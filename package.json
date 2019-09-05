@@ -1,19 +1,37 @@
 {
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "node backend/server.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcrypt-nodejs": "0.0.3",
-        "body-parser": "^1.19.0",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "knex": "^0.19.3",
-        "pg": "^7.12.1"
-    }
+  "name": "face_detection",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "clarifai": "^2.9.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-favicon": "0.0.17",
+    "react-helmet": "^5.2.1",
+    "react-particles-js": "^2.7.0",
+    "react-scripts": "2.1.8",
+    "react-tilt": "^0.1.4",
+    "tachyons": "^4.11.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
