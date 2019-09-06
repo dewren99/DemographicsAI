@@ -129,6 +129,7 @@
     .faceNumber {
         display: flex;
         align-items: center;
+        animation: none;
     }
 
     .faceNumber p {
